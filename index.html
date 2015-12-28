@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LivePreview</title>
+    <link href="css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="icon/style.css">
+</head>
+
+<body>
+    <nav class="mainNav">
+        <div class="container">
+            <ul>
+                <li><a href="#">LivePreview</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <aside class="file">
+            <div class="filemenu">
+                <h4>File Directory<span class="icon icon-menu" style="float: right;padding:12px 0px 0 0;font-size:22px;"></span></h4>
+                <div class="more">
+                    <ul>
+                        <li onclick="newfile()">New file</li>
+                        <li onclick="delfile()">Delete file</li>
+                        <li onclick="downfile()" onclick="newfile()">Download</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="side"> <span class="icon icon-toleft" style="color:#9d9d9d;float: right;font-size: 20px;margin-top:300px;"></span>
+            </div>
+        </aside>
+        <article class="code">
+            <!-- <div class="nothing"><h1>coding~ <span class="icon icon-grin"></span></h1></div> -->
+            <!-- contenteditable onfocus="true" -->
+            <div id="edit">
+                <div class="tabnav">
+                    <ul>
+                        <li class="tab" onclick="switching(0)">index.html</li>
+                        <li onclick="switching(1)">style.css</li>
+                        <li onclick="switching(2)">js.js</li>
+                    </ul>
+                </div>
+                <div class="numside"></div>
+                <textarea id="editmainhtml" class="editmain" spellcheck=false></textarea>
+                <textarea id="editmaincss" class="editmain" spellcheck=false></textarea>
+                <textarea id="editmainjs" class="editmain" spellcheck=false></textarea>
+            </div>
+            <div id="view">
+                <iframe name="plunkerPreviewTarget" id="ifr" src="about:blank" class="plunker-previewer-iframe" frameborder="0" width="100%" height="100%" scrolling="auto"></iframe>
+            </div>
+        </article>
+    </div>
+    <script src="js/jquery-1.11.3.js"></script>
+    <script>
+    $(".side span").bind("click", function() {
+        if ($(this).hasClass("icon-toleft")) {
+            $(".filemenu").hide();
+            $(this).removeClass("icon-toleft");
+            $(this).addClass("icon-toright");
+        } else {
+            $(".filemenu").show();
+            $(this).removeClass("icon-toright");
+            $(this).addClass("icon-toleft");
+        }
+    })
+    $(".icon-menu").click(function() {
+        $(".more").toggle(function() {
+            $(this).attr("display", "block");
+        }, function() {
+            $(this).attr("display", "none");
+        })
+    })
+
+    function newfile() {
+        if ($('.folder').length > 17) return;
+        $file = $('<div class="folder"><span class="icon icon-folder"></span><span class="filename" contenteditable="true">newfile</span></div>');
+        $file.appendTo($(".filemenu"));
+    }
+    $(".folder").click(function() {
+
+    })
+    document.getElementById("editmainhtml").focus();
+    $("#editmainhtml").keyup(function() {
+        var strhtml = $(this).val();
+        var strcss = $("#editmaincss").val();
+        var strjs = $("#editmainjs").val();
+        var strall = strhtml.substring(0, strhtml.indexOf("<body>")) + "<style>" + strcss + "</style>" + strhtml.substring(strhtml.indexOf("<body>"), strhtml.indexOf("</body>")) + "\<script\>" + strjs + "\</script\>" + strhtml.substring(strhtml.indexOf("</body>"));
+
+        frames["plunkerPreviewTarget"].document.write(strall);
+        frames["plunkerPreviewTarget"].document.close();
+    })
+    $("#editmaincss").keyup(function() {
+        var strhtml = $("#editmainhtml").val();
+        var strcss = $("#editmaincss").val();
+        var strjs = $("#editmainjs").val();
+        var strall = strhtml.substring(0, strhtml.indexOf("<body>")) + "<style>" + strcss + "</style>" + strhtml.substring(strhtml.indexOf("<body>"), strhtml.indexOf("</body>")) + "\<script\>" + strjs + "\</script\>" + strhtml.substring(strhtml.indexOf("</body>"));
+
+        frames["plunkerPreviewTarget"].document.write(strall);
+        frames["plunkerPreviewTarget"].document.close();
+    })
+    $("#editmainjs").keyup(function() {
+        var strhtml = $("#editmainhtml").val();
+        var strcss = $("#editmaincss").val();
+        var strjs = $("#editmainjs").val();
+        var strall = strhtml.substring(0, strhtml.indexOf("<body>")) + "<style>" + strcss + "</style>" + strhtml.substring(strhtml.indexOf("<body>"), strhtml.indexOf("</body>")) + "\<script\>" + strjs + "\</script\>" + strhtml.substring(strhtml.indexOf("</body>"));
+
+        frames["plunkerPreviewTarget"].document.write(strall);
+        frames["plunkerPreviewTarget"].document.close();
+    })
+
+    function switching(n) {
+        var len = $(".editmain").length;
+
+        for (var i = 0; i < len; i++) {
+            if (i != n) {
+                $(".editmain:eq(" + i + ")").hide()
+                $(".tabnav li:eq(" + i + ")").removeClass("tab");
+            } else {
+                $(".editmain:eq(" + i + ")").show()
+                $(".tabnav li:eq(" + i + ")").addClass("tab");
+            }
+        }
+    }
+    </script>
+</body>
+
+</html>
