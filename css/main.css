@@ -1,0 +1,254 @@
+/*body {
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}*/
+
+@font-face {
+    font-family: 'ChampagneBold';
+    src: url('../font/ChampagneBold.ttf');
+}
+
+@font-face {
+    font-family: 'eurof35';
+    src: url('../font/eurof35.ttf');
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body,html{height: 100%;}
+
+.container {
+    min-width: 1349px;
+    width: 100%;
+    margin: 0 auto;
+    height: 100%;
+    background-color: #fff;
+}
+
+.mainNav {
+    width: 100%;
+     min-width: 1349px;
+    height: 45px;
+    font-family: "ChampagneBold";
+    background-color: #222;
+    border: 1px solid #080808;
+    /*  */
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
+    cursor: pointer;
+}
+
+.mainNav a {
+    color: #9d9d9d;
+}
+
+.mainNav ul {
+    padding-left: 100px;
+}
+
+.mainNav li:hover a {
+    color: #fff;
+}
+
+.mainNav li {
+    float: left;
+    padding: 0 30px;
+    height: 45px;
+    font-size: 18px;
+    line-height: 45px;
+    text-align: center;
+    list-style-type: none;
+    /*border: 1px solid red;*/
+}
+
+.mainNav li:first-child {
+    font-size: 20px;
+}
+
+.file {
+    position: relative;
+    font-family: "eurof35";
+    display: none;
+
+}
+
+.code {
+    height: 100%;
+    float: left;
+
+     
+}
+
+.filemenu {
+    float: left;
+    width: 150px;
+    height: 100%;
+
+}
+
+.file h4 {
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    border-bottom: 1px solid #ccc;
+    color: #333;
+    letter-spacing: 2px;
+    font-size: 17px;
+    text-align: center;
+    
+}
+
+.side {
+    float: left;
+    width: 15px;
+    height: 100%;
+   
+    border-right: 1px solid #ccc;
+}
+
+.more {
+    position: absolute;
+    left: 120px;
+    top: 40px;
+    width: 100px;
+    text-align: center;
+    border-radius: 3px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    display: none;
+    z-index: 100;
+}
+
+.more li {
+    height: 35px;
+    color: #333;
+    font-size: 20px;
+    line-height: 35px;
+}
+
+.more li:hover {
+    background-color: #ccc;
+    color: #fff;
+}
+
+.folder {
+    font-size: 20px;
+    color: #333;
+    margin: 10px 10px 10px 10px;
+}
+
+.icon-folder {
+    margin-right: 10px;
+}
+
+.nothing {
+    font-family: "eurof35";
+    width: 100%;
+    height: 100%;
+    font-size: 50px;
+    padding-left: 200px;
+    text-align: center;
+    margin: 20% auto;
+    display: none;
+    
+}
+
+
+.codeedit{
+     float: left;
+      width: 550px;
+     height: 100%;
+     border:1px solid #ccc;
+     /*display: none;*/
+}
+.CodeMirror{
+ height: 100%;  
+ border:1px solid #ccc;
+ font-family: "Tahoma"; 
+ font-size: 12px;
+ font-weight: 600;
+}
+#view {
+    float: right;
+    /*border:1px red solid;*/
+    width: 800px;
+    height: 100%;
+    /*display: none;*/
+}
+
+.tabnav {
+    box-shadow: -1px -1px 1px #ccc;
+    font-family: "eurof35";
+    width: 100%;
+    height: 40px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    border-left: none;
+}
+
+.tabnav ul {
+    /*float: left;*/
+    /*margin-left: 30px;*/
+}
+
+.tabnav ul li {
+    float: left;
+    width: 100px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 22px;
+    color: #333;
+}
+
+.tab {
+    background-color: #ccc;
+    color: #fff;
+}
+
+.numside {
+    width: 15px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    background-color: #404040;
+    /*border-right: 1px solid #ccc;*/
+}
+
+#editmainhtml,
+#editmaincss,
+#editmainjs {
+    float: right;
+    width: 534px;
+    height: 560px;
+    background-color: #222;
+    outline: 0;
+    color: #fff;
+    z-index: 10;
+    font-size: 14px;
+    overflow: scroll;
+    font-family: "Tahoma";
+    resize: none;
+    display: none;
+}
+#editmaincss,#editmainjs{
+    display: none;
+}
+/*textarea{
+visibility: hidden;
+}*/
+.select{
+    color:#ccc;
+    font-weight: 700;
+}

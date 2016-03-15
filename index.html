@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LivePreview</title>
+    <link rel="stylesheet" href="codemirror/lib/codemirror_mini.css">
+    <link rel=stylesheet href="codemirror/doc/docs_mini.css">
+    <link href="css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="icon/style.css">
+    <link rel="stylesheet" href="codemirror/addon/fold/foldgutter.css" />
+    <script src="codemirror/lib/codemirror_mini.js"></script>
+    <script src="codemirror/addon/fold/foldcode.js"></script>
+    <script src="codemirror/addon/fold/foldgutter.js"></script>
+    <script src="codemirror/addon/fold/brace-fold.js"></script>
+    <script src="codemirror/addon/fold/xml-fold.js"></script>
+    <script src="codemirror/addon/fold/comment-fold.js"></script>
+    <script src="codemirror/mode/javascript/javascript_mini.js"></script>
+    <script src="codemirror/mode/xml/xml.js"></script>
+    <script src="codemirror/mode/css/css_mini.js"></script>
+  
+
+    <style type="text/css">
+    .CodeMirror {
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+    }
+    </style>
+</head>
+
+<body>
+    <nav class="mainNav">
+        <ul>
+            <li><a href="#">LivePreview</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <aside class="file">
+            <div class="filemenu">
+                <h4>File Directory<span class="icon icon-menu" style="float: right;padding:12px 0px 0 0;font-size:22px;"></span></h4>
+                <div class="more">
+                    <ul>
+                        <li onclick="newfile()">New file</li>
+                        <li onclick="delfile()">Delete file</li>
+                        <li onclick="downfile()" onclick="newfile()">Download</li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+        <div class="side"> <span class="icon icon-toleft" style="color:#9d9d9d;float: right;font-size: 20px;margin-top:300px;"></span>
+        </div>
+        <div class="code">
+            <div class="nothing">
+                <h1>coding~ <span class="icon icon-grin"></span></h1></div>
+            <div class="codeedit">
+                <div class="tabnav">
+                    <ul>
+                        <li class="tab" onclick="switching(0)">index.html</li>
+                        <li onclick="switching(1)">style.css</li>
+                        <li onclick="switching(2)">js.js</li>
+                    </ul>
+                </div>
+                <textarea id="editmainhtml" class="editmain" spellcheck=false></textarea>
+                <textarea id="editmaincss" class="editmain" spellcheck=false></textarea>
+                <textarea id="editmainjs" class="editmain" spellcheck=false></textarea>
+            </div>
+            <div id="view">
+                <iframe name="plunkerPreviewTarget" id="ifr" src="about:blank" class="plunker-previewer-iframe" frameborder="0" width="100%" height="100%" scrolling="auto"></iframe>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery-1.11.3.js"></script>
+    <script>
+    window.onload=function(){
+
+    }
+     window.editor_js = CodeMirror.fromTextArea(document.getElementById("editmainjs"), {
+        mode: "javascript",
+        lineNumbers: true,
+        lineWrapping: true,
+        extraKeys: {
+            "Ctrl-Q": function(cm) {
+                cm.foldCode(cm.getCursor());
+            }
+        },
+        foldGutter: true,
+        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+    });
+
+     window.editor_html = CodeMirror.fromTextArea(document.getElementById("editmainhtml"), {
+        mode: "text/html",
+        lineNumbers: true,
+        lineWrapping: true,
+        extraKeys: {
+            "Ctrl-Q": function(cm) {
+                cm.foldCode(cm.getCursor());
+            }
+        },
+        foldGutter: true,
+        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+    });
+     window.editor_css = CodeMirror.fromTextArea(document.getElementById("editmaincss"), {
+        mode: "css",
+        lineNumbers: true,
+        lineWrapping: true,
+        extraKeys: {
+            "Ctrl-Q": function(cm) {
+                cm.foldCode(cm.getCursor());
+            }
+        },
+        foldGutter: true,
+        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+    });
+
+    $(".side span").bind("click", function() {
+        alert("没修改，暂时不打开")
+        if ($(this).hasClass("icon-toleft")) {
+            $(".filemenu").hide();
+            $(this).removeClass("icon-toleft");
+            $(this).addClass("icon-toright");
+        } else {
+            $(".filemenu").show();
+            $(this).removeClass("icon-toright");
+            $(this).addClass("icon-toleft");
+        }
+    })
+    $(".icon-menu").click(function() {
+        $(".more").toggle(function() {
+            $(this).attr("display", "block");
+        }, function() {
+            $(this).attr("display", "none");
+        })
+        return false;
+    })
+
+    function newfile() {
+        if ($('.folder').length > 17) return;
+        $file = $('<div class="folder"><span class="icon icon-folder" onclick="showedit(this)"></span><span class="filename" contenteditable="true">newfile</span></div>');
+        $file.appendTo($(".filemenu"));
+    }
+    $(".folder").click(function() {
+
+        })
+     //  editor_html.toTextArea();
+     // editor_css.toTextArea();
+     // editor_js.toTextArea();
+        // document.getElementById("editmainhtml").focus();
+    $("#editmainhtml~div").keyup(function() {
+   
+        var strhtml = editor_html.getValue();
+       
+        var strcss = editor_css.getValue();
+        var strjs =  editor_js.getValue();
+      
+        var strall = strhtml.substring(0, strhtml.indexOf("<body>")) + "<style>" + strcss + "</style>" + strhtml.substring(strhtml.indexOf("<body>"), strhtml.indexOf("</body>")) + "\<script\>" + strjs + "\</script\>" + strhtml.substring(strhtml.indexOf("</body>"));
+
+        frames["plunkerPreviewTarget"].document.write(strall);
+        frames["plunkerPreviewTarget"].document.close();
+    })
+    $("#editmaincss~div").keyup(function() {
+   
+        var strhtml = editor_html.getValue();
+       
+        var strcss = editor_css.getValue();
+        var strjs =  editor_js.getValue();
+        var strall = strhtml.substring(0, strhtml.indexOf("<body>")) + "<style>" + strcss + "</style>" + strhtml.substring(strhtml.indexOf("<body>"), strhtml.indexOf("</body>")) + "\<script\>" + strjs + "\</script\>" + strhtml.substring(strhtml.indexOf("</body>"));
+
+        frames["plunkerPreviewTarget"].document.write(strall);
+        frames["plunkerPreviewTarget"].document.close();
+    })
+    $("#editmainjs~div").keyup(function() {
+      
+     
+        var strhtml = editor_html.getValue();
+       
+        var strcss = editor_css.getValue();
+        var strjs =  editor_js.getValue();
+        var strall = strhtml.substring(0, strhtml.indexOf("<body>")) + "<style>" + strcss + "</style>" + strhtml.substring(strhtml.indexOf("<body>"), strhtml.indexOf("</body>")) + "\<script\>" + strjs + "\</script\>" + strhtml.substring(strhtml.indexOf("</body>"));
+
+        frames["plunkerPreviewTarget"].document.write(strall);
+        frames["plunkerPreviewTarget"].document.close();
+    })
+
+    function switching(n) {
+        var len = $(".editmain").length;
+
+        for (var i = 0; i < len; i++) {
+            if (i != n) {
+                $(".editmain:eq(" + i + ")~div").hide()
+                $(".tabnav li:eq(" + i + ")").removeClass("tab");
+            } else {
+                $(".editmain:eq(" + i + ")~div").show()
+                $(".tabnav li:eq(" + i + ")").addClass("tab");
+            }
+        }
+    }
+    $("body").click(function(event) {
+
+        $(".more").hide();
+
+    })
+
+    function showedit(elemt) {
+
+        $(".nothing").hide();
+        $(".codeedit").show();
+        $("#view").show();
+        $($(elemt).parent().parent().children().removeClass("select"))
+        if (!$(elemt).parent().hasClass("select")) {
+            $(elemt).parent().addClass("select");
+        }
+
+
+    }
+    </script>
+</body>
+
+</html>
