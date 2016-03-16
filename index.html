@@ -155,8 +155,9 @@
        
         var strcss = editor_css.getValue();
         var strjs =  editor_js.getValue();
-      
-        var strall = strhtml.substring(0, strhtml.indexOf("<body>")) + "<style>" + strcss + "</style>" + strhtml.substring(strhtml.indexOf("<body>"), strhtml.indexOf("</body>")) + "\<script\>" + strjs + "\</script\>" + strhtml.substring(strhtml.indexOf("</body>"));
+       var bodybegin=strhtml.indexOf("<body>");
+         var bodyend=strhtml.lastIndexOf("</body>");
+        var strall = strhtml.substring(0, bodybegin) + "<style>" + strcss + "</style>" + strhtml.substring(bodybegin, bodyend) + "\<script\>" + strjs + "\</script\>" + strhtml.substring(bodyend);
 
         frames["plunkerPreviewTarget"].document.write(strall);
         frames["plunkerPreviewTarget"].document.close();
@@ -167,7 +168,9 @@
        
         var strcss = editor_css.getValue();
         var strjs =  editor_js.getValue();
-        var strall = strhtml.substring(0, strhtml.indexOf("<body>")) + "<style>" + strcss + "</style>" + strhtml.substring(strhtml.indexOf("<body>"), strhtml.indexOf("</body>")) + "\<script\>" + strjs + "\</script\>" + strhtml.substring(strhtml.indexOf("</body>"));
+         var bodybegin=strhtml.indexOf("<body>");
+         var bodyend=strhtml.lastIndexOf("</body>");
+        var strall = strhtml.substring(0, bodybegin) + "<style>" + strcss + "</style>" + strhtml.substring(bodybegin, bodyend) + "\<script\>" + strjs + "\</script\>" + strhtml.substring(bodyend);
 
         frames["plunkerPreviewTarget"].document.write(strall);
         frames["plunkerPreviewTarget"].document.close();
@@ -179,7 +182,9 @@
        
         var strcss = editor_css.getValue();
         var strjs =  editor_js.getValue();
-        var strall = strhtml.substring(0, strhtml.indexOf("<body>")) + "<style>" + strcss + "</style>" + strhtml.substring(strhtml.indexOf("<body>"), strhtml.indexOf("</body>")) + "\<script\>" + strjs + "\</script\>" + strhtml.substring(strhtml.indexOf("</body>"));
+         var bodybegin=strhtml.indexOf("<body>");
+         var bodyend=strhtml.lastIndexOf("</body>");
+        var strall = strhtml.substring(0, bodybegin) + "<style>" + strcss + "</style>" + strhtml.substring(bodybegin, bodyend) + "\<script\>" + strjs + "\</script\>" + strhtml.substring(bodyend);
 
         frames["plunkerPreviewTarget"].document.write(strall);
         frames["plunkerPreviewTarget"].document.close();

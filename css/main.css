@@ -170,6 +170,7 @@ ul {
      float: left;
       width: 550px;
      height: 100%;
+     overflow: hidden;
      border:1px solid #ccc;
      /*display: none;*/
 }
@@ -183,7 +184,7 @@ ul {
 #view {
     float: right;
     /*border:1px red solid;*/
-    width: 800px;
+    width: 700px;
     height: 100%;
     /*display: none;*/
 }
